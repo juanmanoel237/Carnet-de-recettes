@@ -1,18 +1,21 @@
-const express = require('express')
-const router = express.Router()
-const {createRecipe,
+const express = require('express');
+const router = express.Router();
+const {
+    createRecipe,
     getAllRecipes,
     getRecipeById,
     updateRecipe,
-    deleteRecipe,} = require('../controllers/recipeController')
-const authMiddleware = require('../middleware/authMiddleware')
-const multer = require('multer')
+    deleteRecipe,
+} = require('../controllers/recipeController');
+const authMiddleware = require('../middleware/authMiddleware');
+const multer = require('multer');
+const path = require('path'); // Ensure you import path
 
 const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
+    destination: function (req, file, cb) {
         cb(null, 'uploads/');
     },
-    filename: function(req, file, cb) {
+    filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
         cb(null, uniqueSuffix + path.extname(file.originalname));
     }
@@ -30,10 +33,10 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage, fileFilter });
 
-router.post('/', authMiddleware, upload.single('image'), createRecipe)
-router.get('/', getAllRecipes)
-router.get('/:id', getRecipeById)
-router.put('/:id', authMiddleware, upload.single('image'), updateRecipe)
-router.delete('/:id', authMiddleware, deleteRecipe)
+router.post('/', authMiddleware, upload.single('image'), createRecipe);
+router.get('/', getAllRecipes);
+router.get('/:id', getRecipeById);
+router.put('/:id', authMiddleware, upload.single('image'), updateRecipe);
+router.delete('/:id', authMiddleware, deleteRecipe);
 
-module.exports = router
+module.exports = router;
