@@ -40,3 +40,29 @@ nav ul li a {
 nav ul li a:hover {
     color: #007BFF;
 }
+
+.logout-button{
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.3 ease;
+}
+
+.logout-button:hover{
+    color: #dc3545;
+}
+
+@media (max-width:768px){
+    .header{
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+}
