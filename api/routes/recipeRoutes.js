@@ -9,7 +9,7 @@ const {
 } = require('../controllers/recipeController');
 const authMiddleware = require('../middleware/authMiddleware');
 const multer = require('multer');
-const path = require('path'); // Ensure you import path
+const path = require('path');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -33,7 +33,7 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage, fileFilter });
 
-router.post('/', authMiddleware, upload.single('image'), createRecipe);
+router.post('/', authMiddleware, upload.single('image'), createRecipe);  // Assurez-vous que authMiddleware est appliqué
 router.get('/', getAllRecipes);
 router.get('/:id', getRecipeById);
 router.put('/:id', authMiddleware, upload.single('image'), updateRecipe);
